@@ -6,14 +6,16 @@ import {
   FlatList,
   StatusBar,
   View,
+  SectionList,
 } from 'react-native';
 import mentorsList from './data.json';
+import groupedMentors from './grouped-data.json';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.scrollView}>
-        <FlatList
+        {/* <FlatList
           data={[...mentorsList]}
           renderItem={({ item }) => {
             console.log(item.id);
@@ -30,6 +32,21 @@ export default function App() {
           ListEmptyComponent={<Text>No mentors available</Text>}
           ListHeaderComponent={<Text style={styles.headerText}>Mentors</Text>}
           ListFooterComponent={<Text style={styles.headerText}>Next</Text>}
+        /> */}
+        <SectionList
+          sections={groupedMentors}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.card}>
+                <Text style={styles.cardText}>{item}</Text>
+              </View>
+            );
+          }}
+          renderSectionHeader={({ section }) => (
+            <Text style={styles.sectionHeaderText}>{section.occupation}</Text>
+          )}
+          ItemSeparatorComponent={() => <View style={{ height: 10 }}></View>}
+          SectionSeparatorComponent={() => <View style={{ height: 16 }}></View>}
         />
       </View>
     </SafeAreaView>
@@ -50,14 +67,19 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
-    marginBottom: 16,
   },
   cardText: {
-    fontSize: 30,
+    fontSize: 20,
   },
   headerText: {
     fontSize: 30,
     marginVertical: 30,
     textAlign: 'center',
   },
+  sectionHeaderText: {
+    backgroundColor: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  }
 });
