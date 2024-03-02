@@ -26,8 +26,10 @@ export default function App() {
           }}
           horizontal={false}
           keyExtractor={(item, index) => item.id.toString()}
-          ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
+          ItemSeparatorComponent={() => <View style={{ height: 5 }}></View>}
           ListEmptyComponent={<Text>No mentors available</Text>}
+          ListHeaderComponent={<Text style={styles.headerText}>Mentors</Text>}
+          ListFooterComponent={<Text style={styles.headerText}>Next</Text>}
         />
       </View>
     </SafeAreaView>
@@ -48,11 +50,14 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
-    // marginHorizontal: 5,
-    // marginVertical: 5,
-    width: 300,
+    marginBottom: 16,
   },
   cardText: {
     fontSize: 30,
+  },
+  headerText: {
+    fontSize: 30,
+    marginVertical: 30,
+    textAlign: 'center',
   },
 });
