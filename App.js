@@ -3,25 +3,31 @@ import {
   StyleSheet,
   Text,
   SafeAreaView,
-  View,
+  FlatList,
   StatusBar,
+  View,
 } from 'react-native';
 import mentorsList from './data.json';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        {mentorsList.map((mentor) => {
-          console.log(mentor.id)
-          return (
-            <View style={styles.card} key={mentor.id}>
-              <Text style={styles.cardText}>{mentor.mentor}</Text>
-              <Text>{mentor.location}</Text>
-            </View>
-          );
-        })}
-      </ScrollView>
+      <View style={styles.scrollView}>
+        <FlatList
+          data={mentorsList}
+          renderItem={({ item }) => {
+            console.log(item.id);
+            return (
+              <View style={styles.card} key={item.id}>
+                <Text style={styles.cardText}>{item.mentor}</Text>
+                <Text>{item.location}</Text>
+              </View>
+            );
+          }}
+          keyExtractor={(item, index) => item.id.toString()}
+          horizontal
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -41,8 +47,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginVertical: 15,
+    marginHorizontal: 5,
+    width: 300,
   },
   cardText: {
     fontSize: 30,
-  }
+  },
 });
