@@ -3,25 +3,35 @@ import {
   StyleSheet,
   Text,
   SafeAreaView,
-  View,
+  FlatList,
   StatusBar,
+  View,
 } from 'react-native';
 import mentorsList from './data.json';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        {mentorsList.map((mentor) => {
-          console.log(mentor.id)
-          return (
-            <View style={styles.card} key={mentor.id}>
-              <Text style={styles.cardText}>{mentor.mentor}</Text>
-              <Text>{mentor.location}</Text>
-            </View>
-          );
-        })}
-      </ScrollView>
+      <View style={styles.scrollView}>
+        <FlatList
+          data={[...mentorsList]}
+          renderItem={({ item }) => {
+            console.log(item.id);
+            return (
+              <View style={styles.card} key={item.id}>
+                <Text style={styles.cardText}>{item.mentor}</Text>
+                <Text>{item.location}</Text>
+              </View>
+            );
+          }}
+          horizontal={false}
+          keyExtractor={(item, index) => item.id.toString()}
+          ItemSeparatorComponent={() => <View style={{ height: 5 }}></View>}
+          ListEmptyComponent={<Text>No mentors available</Text>}
+          ListHeaderComponent={<Text style={styles.headerText}>Mentors</Text>}
+          ListFooterComponent={<Text style={styles.headerText}>Next</Text>}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -40,9 +50,14 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
-    marginVertical: 15,
+    marginBottom: 16,
   },
   cardText: {
     fontSize: 30,
-  }
+  },
+  headerText: {
+    fontSize: 30,
+    marginVertical: 30,
+    textAlign: 'center',
+  },
 });
