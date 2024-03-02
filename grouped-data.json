@@ -1,0 +1,22 @@
+[
+  {
+    "occupation": "developer",
+    "data": ["HTML", "CSS", "JavaScript"]
+  },
+  {
+    "occupation": "designer",
+    "data": ["UI/UX", "Photoshop", "Illustrator"]
+  },
+  {
+    "occupation": "project manager",
+    "data": ["Agile", "Scrum", "Communication"]
+  },
+  {
+    "occupation": "data scientist",
+    "data": ["Python", "Machine Learning", "Statistics"]
+  },
+  {
+    "occupation": "backend developer",
+    "data": ["Java", "Spring", "SQL"]
+  }
+]
