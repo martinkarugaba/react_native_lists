@@ -14,7 +14,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View style={styles.scrollView}>
         <FlatList
-          data={mentorsList}
+          data={[...mentorsList]}
           renderItem={({ item }) => {
             console.log(item.id);
             return (
@@ -24,8 +24,10 @@ export default function App() {
               </View>
             );
           }}
+          horizontal={false}
           keyExtractor={(item, index) => item.id.toString()}
-          horizontal
+          ItemSeparatorComponent={() => <View style={{ height: 16 }}></View>}
+          ListEmptyComponent={<Text>No mentors available</Text>}
         />
       </View>
     </SafeAreaView>
@@ -46,8 +48,8 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
-    marginVertical: 15,
-    marginHorizontal: 5,
+    // marginHorizontal: 5,
+    // marginVertical: 5,
     width: 300,
   },
   cardText: {
